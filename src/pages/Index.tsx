@@ -68,7 +68,78 @@ const Index = () => {
     }
   ]);
 
-
+  const personasData = [
+    {
+      id: 1,
+      name: 'Сергей Иванович',
+      surname: 'Петров',
+      role: 'Участник СВО',
+      unit: '58-я общевойсковая армия',
+      position: 'Старший лейтенант',
+      photo: null,
+      interviewDate: '2024-01-15',
+      preview: 'О первых днях операции, боевых задачах и товариществе в подразделении',
+      fullText: 'Когда началась операция, мы все понимали важность нашей миссии. Защита мирного населения Донбасса была для нас приоритетом. Каждый день мы видели благодарность людей, которых освобождали от восьмилетнего террора.',
+      topics: ['Первые дни СВО', 'Боевые задачи', 'Мирное население'],
+      duration: '25 минут'
+    },
+    {
+      id: 2,
+      name: 'Анна Викторовна',
+      surname: 'Козлова',
+      role: 'Добровольчка',
+      organization: 'Фонд помощи участникам СВО',
+      position: 'Координатор',
+      photo: null,
+      interviewDate: '2024-02-20',
+      preview: 'О волонтерской работе, помощи семьям военнослужащих и гражданской солидарности',
+      fullText: 'С первых дней операции мы организовали помощь семьям военнослужащих. Собирали гуманитарную помощь, поддерживали морально. Люди показали невероятную солидарность и желание помочь.',
+      topics: ['Волонтерская работа', 'Помощь семьям', 'Гражданская солидарность'],
+      duration: '18 минут'
+    },
+    {
+      id: 3,
+      name: 'Владимир Александрович',
+      surname: 'Смирнов',
+      role: 'Политический деятель',
+      organization: 'Государственная Дума РФ',
+      position: 'Депутат, член комитета по обороне',
+      photo: null,
+      interviewDate: '2024-03-10',
+      preview: 'О политических предпосылках СВО, международной обстановке и целях операции',
+      fullText: 'Решение о проведении специальной военной операции было вынужденным. Восемь лет мы пытались решить проблему дипломатическим путем, но киевский режим не выполнял Минские соглашения.',
+      topics: ['Политические предпосылки', 'Дипломатия', 'Минские соглашения'],
+      duration: '32 минуты'
+    },
+    {
+      id: 4,
+      name: 'Елена Сергеевна',
+      surname: 'Морозова',
+      role: 'Историк',
+      organization: 'МГУ им. М.В. Ломоносова',
+      position: 'Доктор исторических наук',
+      photo: null,
+      interviewDate: '2024-03-25',
+      preview: 'Об исторических корнях конфликта, роли Украины в советской истории и современном контексте',
+      fullText: 'Чтобы понять происходящее сегодня, нужно обратиться к истории. Украина всегда была частью русского мира, и попытки разорвать эти связи имели трагические последствия.',
+      topics: ['Исторические корни', 'Русский мир', 'Советская история'],
+      duration: '28 минут'
+    },
+    {
+      id: 5,
+      name: 'Дмитрий Николаевич',
+      surname: 'Волков',
+      role: 'Военный корреспондент',
+      organization: 'РИА Новости',
+      position: 'Специальный корреспондент',
+      photo: null,
+      interviewDate: '2024-04-05',
+      preview: 'О работе в зоне СВО, освещении событий и важности правдивой информации',
+      fullText: 'Быть военкором в зоне СВО — большая ответственность. Важно показать правду о происходящем, рассказать о героизме наших бойцов и помочь людям понять суть событий.',
+      topics: ['Военная журналистика', 'Освещение СВО', 'Информационная война'],
+      duration: '22 минуты'
+    }
+  ];
 
   const handleMemorialSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -126,14 +197,14 @@ const Index = () => {
                 Хронология
               </button>
               <button
-                onClick={() => setActiveSection('heroes')}
+                onClick={() => setActiveSection('personas')}
                 className={`px-3 py-2 rounded-lg transition-colors ${
-                  activeSection === 'heroes' 
+                  activeSection === 'personas' 
                     ? 'bg-patriotic-blue text-white' 
                     : 'text-gray-600 hover:text-patriotic-blue'
                 }`}
               >
-                Герои
+                Персоналии
               </button>
               <button
                 onClick={() => setActiveSection('resources')}
@@ -256,9 +327,136 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Personas Section */}
+      {activeSection === 'personas' && (
+        <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="font-montserrat text-4xl font-bold text-patriotic-blue mb-6">
+                Персоналии СВО
+              </h2>
+              <p className="text-xl text-gray-600 max-w-4xl mx-auto">
+                Интервью с участниками специальной военной операции, добровольцами, 
+                политиками и историками, рассказывающими о событиях из первых рук
+              </p>
+            </div>
 
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {personasData.map((persona) => (
+                <Card key={persona.id} className="hover:shadow-xl transition-all duration-300 cursor-pointer bg-white">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="w-16 h-16 bg-gradient-to-br from-patriotic-blue to-patriotic-red rounded-full flex items-center justify-center flex-shrink-0">
+                        <Icon name="User" size={28} className="text-white" />
+                      </div>
+                      <div className="text-right flex-1 ml-4">
+                        <Badge 
+                          className={`text-xs mb-2 ${
+                            persona.role === 'Участник СВО' ? 'bg-patriotic-red text-white' :
+                            persona.role === 'Добровольчка' ? 'bg-green-500 text-white' :
+                            persona.role === 'Политический деятель' ? 'bg-patriotic-blue text-white' :
+                            persona.role === 'Историк' ? 'bg-purple-500 text-white' :
+                            'bg-orange-500 text-white'
+                          }`}
+                        >
+                          {persona.role}
+                        </Badge>
+                        <p className="text-xs text-gray-500">
+                          {new Date(persona.interviewDate).toLocaleDateString('ru-RU', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                          })}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    <CardTitle className="text-xl font-bold text-patriotic-blue mb-2">
+                      {persona.name} {persona.surname}
+                    </CardTitle>
+                    <p className="text-sm font-medium text-gray-700 mb-1">{persona.position}</p>
+                    <p className="text-xs text-gray-500">
+                      {persona.organization || persona.unit}
+                    </p>
+                  </CardHeader>
+
+                  <CardContent className="space-y-4">
+                    <div className="flex items-center justify-between text-xs text-gray-500">
+                      <span className="flex items-center">
+                        <Icon name="Clock" size={14} className="mr-1" />
+                        {persona.duration}
+                      </span>
+                      <span className="flex items-center">
+                        <Icon name="MessageSquare" size={14} className="mr-1" />
+                        Интервью
+                      </span>
+                    </div>
+
+                    <div className="border-t pt-4">
+                      <p className="text-sm text-gray-700 leading-relaxed mb-4">
+                        {persona.preview}
+                      </p>
+                      
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {persona.topics.slice(0, 3).map((topic, index) => (
+                          <Badge key={index} variant="outline" className="text-xs border-patriotic-blue text-patriotic-blue">
+                            {topic}
+                          </Badge>
+                        ))}
+                      </div>
+
+                      <Button 
+                        className="w-full bg-patriotic-blue hover:bg-patriotic-blue/90 text-white"
+                        size="sm"
+                      >
+                        <Icon name="Play" size={16} className="mr-2" />
+                        Читать интервью
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+
+            <div className="mt-16 bg-white rounded-2xl p-8">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-patriotic-blue mb-4">
+                  Статистика интервью
+                </h3>
+                <p className="text-gray-600">
+                  Собираем свидетельства участников исторических событий
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-patriotic-red mb-2">2</div>
+                  <div className="text-sm text-gray-600">Участников СВО</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-green-600 mb-2">1</div>
+                  <div className="text-sm text-gray-600">Добровольцев</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-patriotic-blue mb-2">1</div>
+                  <div className="text-sm text-gray-600">Политиков</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-purple-600 mb-2">1</div>
+                  <div className="text-sm text-gray-600">Историков</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-orange-600 mb-2">1</div>
+                  <div className="text-sm text-gray-600">Журналистов</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Immortal Regiment Section */}
+      {activeSection === 'memorial' && (
       <section className="py-20 bg-gradient-to-br from-red-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -609,6 +807,7 @@ const Index = () => {
           </div>
         </div>
       </section>
+      )}
 
       {/* Interactive Timeline Preview */}
       <section className="py-20 bg-gradient-to-r from-patriotic-blue to-patriotic-red text-white">
