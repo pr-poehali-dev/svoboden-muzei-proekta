@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Progress } from '@/components/ui/progress';
+
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
@@ -12,7 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
-  const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState('main');
   const [memorialForm, setMemorialForm] = useState({
     name: '',
     surname: '',
@@ -142,8 +142,76 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-red-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm sticky top-0 z-50">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between py-4">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-patriotic-blue rounded-full flex items-center justify-center">
+                <Icon name="Shield" size={20} className="text-white" />
+              </div>
+              <h1 className="font-montserrat text-xl font-bold text-patriotic-blue">Виртуальный музей СВО</h1>
+            </div>
+            
+            <nav className="hidden md:flex space-x-6">
+              <button
+                onClick={() => setActiveSection('main')}
+                className={`px-3 py-2 rounded-lg transition-colors ${
+                  activeSection === 'main' 
+                    ? 'bg-patriotic-blue text-white' 
+                    : 'text-gray-600 hover:text-patriotic-blue'
+                }`}
+              >
+                Главная
+              </button>
+              <button
+                onClick={() => setActiveSection('timeline')}
+                className={`px-3 py-2 rounded-lg transition-colors ${
+                  activeSection === 'timeline' 
+                    ? 'bg-patriotic-blue text-white' 
+                    : 'text-gray-600 hover:text-patriotic-blue'
+                }`}
+              >
+                Хронология
+              </button>
+              <button
+                onClick={() => setActiveSection('heroes')}
+                className={`px-3 py-2 rounded-lg transition-colors ${
+                  activeSection === 'heroes' 
+                    ? 'bg-patriotic-blue text-white' 
+                    : 'text-gray-600 hover:text-patriotic-blue'
+                }`}
+              >
+                Герои
+              </button>
+              <button
+                onClick={() => setActiveSection('resources')}
+                className={`px-3 py-2 rounded-lg transition-colors ${
+                  activeSection === 'resources' 
+                    ? 'bg-patriotic-blue text-white' 
+                    : 'text-gray-600 hover:text-patriotic-blue'
+                }`}
+              >
+                Ресурсы
+              </button>
+              <button
+                onClick={() => setActiveSection('memorial')}
+                className={`px-3 py-2 rounded-lg transition-colors ${
+                  activeSection === 'memorial' 
+                    ? 'bg-patriotic-red text-white' 
+                    : 'text-gray-600 hover:text-patriotic-red'
+                }`}
+              >
+                Бессмертный полк СВО
+              </button>
+            </nav>
+          </div>
+        </div>
+      </header>
+
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-patriotic-blue to-patriotic-red text-white overflow-hidden">
+      {activeSection === 'main' && (
+        <section className="relative py-16 bg-gradient-to-r from-patriotic-blue to-patriotic-red text-white overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="flex items-center justify-center space-x-3 mb-6">
@@ -153,27 +221,65 @@ const Index = () => {
             <h1 className="font-montserrat text-5xl font-bold">Виртуальный музей СВО</h1>
           </div>
           <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90">
-            Изучайте современную историю России через интерактивные карты, хронологию событий и истории героев
+            Изучайте современную историю России через документы, хронологию событий и истории героев
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              className="bg-white text-patriotic-blue hover:bg-gray-100 px-8 py-3"
-              size="lg"
-            >
-              <Icon name="Map" size={20} className="mr-2" />
-              Исследовать карту
-            </Button>
-            <Button 
-              variant="outline" 
-              className="border-white text-white hover:bg-white hover:text-patriotic-blue px-8 py-3"
-              size="lg"
-            >
-              <Icon name="Clock" size={20} className="mr-2" />
-              Хронология событий
-            </Button>
-          </div>
         </div>
       </section>
+      )}
+
+      {/* Main Section - Цели СВО */}
+      {activeSection === 'main' && (
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16">
+              <h2 className="font-montserrat text-4xl font-bold text-patriotic-blue mb-6">
+                Цели специальной военной операции
+              </h2>
+              <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-12">
+                Специальная военная операция проводится для защиты мирного населения и обеспечения безопасности России
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 mb-16">
+              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
+                <div className="w-16 h-16 bg-patriotic-blue rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <Icon name="Shield" size={32} className="text-white" />
+                </div>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-patriotic-blue">Денацификация</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">Освобождение территорий от неонацистских формирований и идеологии</p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
+                <div className="w-16 h-16 bg-patriotic-red rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <Icon name="Users" size={32} className="text-white" />
+                </div>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-patriotic-blue">Демилитаризация</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">Нейтрализация военной угрозы и разоружение опасных формирований</p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-center p-6 hover:shadow-lg transition-shadow">
+                <div className="w-16 h-16 bg-patriotic-blue rounded-full mx-auto mb-4 flex items-center justify-center">
+                  <Icon name="Heart" size={32} className="text-white" />
+                </div>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-patriotic-blue">Защита населения</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600">Обеспечение безопасности мирного населения Донбасса и других регионов</p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Statistics Section */}
       <section className="py-12 bg-white/80">
