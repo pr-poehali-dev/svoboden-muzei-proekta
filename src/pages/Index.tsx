@@ -68,56 +68,7 @@ const Index = () => {
     }
   ]);
 
-  const regions = [
-    { 
-      id: 'moscow', 
-      name: 'Москва', 
-      description: 'Столица и крупнейший мегаполис России',
-      battleCount: 12,
-      heroCount: 156,
-      memorialCount: 8
-    },
-    { 
-      id: 'spb', 
-      name: 'Санкт-Петербург', 
-      description: 'Северная столица',
-      battleCount: 8,
-      heroCount: 98,
-      memorialCount: 5
-    },
-    { 
-      id: 'rostov', 
-      name: 'Ростовская область', 
-      description: 'Ворота Кавказа',
-      battleCount: 15,
-      heroCount: 204,
-      memorialCount: 12
-    },
-    { 
-      id: 'krasnodar', 
-      name: 'Краснодарский край', 
-      description: 'Житница России',
-      battleCount: 10,
-      heroCount: 134,
-      memorialCount: 7
-    },
-    { 
-      id: 'tatarstan', 
-      name: 'Республика Татарстан', 
-      description: 'Сердце Поволжья',
-      battleCount: 9,
-      heroCount: 112,
-      memorialCount: 6
-    },
-    { 
-      id: 'crimea', 
-      name: 'Республика Крым', 
-      description: 'Жемчужина Черного моря',
-      battleCount: 14,
-      heroCount: 187,
-      memorialCount: 9
-    }
-  ];
+
 
   const handleMemorialSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -305,79 +256,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Interactive Map Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="font-montserrat text-4xl font-bold text-patriotic-blue mb-4">
-              Интерактивная карта регионов
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Выберите регион для изучения местных событий, героев и памятных мест
-            </p>
-          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            {regions.map((region) => (
-              <Card 
-                key={region.id} 
-                className={`cursor-pointer transition-all duration-300 hover:shadow-lg ${
-                  selectedRegion === region.id ? 'ring-2 ring-patriotic-red bg-red-50' : ''
-                }`}
-                onClick={() => setSelectedRegion(selectedRegion === region.id ? null : region.id)}
-              >
-                <CardHeader>
-                  <CardTitle className="flex items-center justify-between">
-                    <span className="text-patriotic-blue">{region.name}</span>
-                    <Icon 
-                      name={selectedRegion === region.id ? "ChevronUp" : "ChevronDown"} 
-                      size={20} 
-                      className="text-gray-500" 
-                    />
-                  </CardTitle>
-                  <p className="text-sm text-gray-600">{region.description}</p>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-3 gap-4 text-center">
-                    <div>
-                      <div className="text-lg font-bold text-patriotic-red">{region.battleCount}</div>
-                      <div className="text-xs text-gray-500">События</div>
-                    </div>
-                    <div>
-                      <div className="text-lg font-bold text-patriotic-blue">{region.heroCount}</div>
-                      <div className="text-xs text-gray-500">Героев</div>
-                    </div>
-                    <div>
-                      <div className="text-lg font-bold text-gray-700">{region.memorialCount}</div>
-                      <div className="text-xs text-gray-500">Мемориалов</div>
-                    </div>
-                  </div>
-                  
-                  {selectedRegion === region.id && (
-                    <div className="mt-6 pt-4 border-t">
-                      <h4 className="font-semibold mb-3 text-patriotic-blue">Доступные разделы:</h4>
-                      <div className="space-y-2">
-                        <Button variant="outline" className="w-full justify-start text-sm">
-                          <Icon name="MapPin" size={16} className="mr-2" />
-                          Ключевые события
-                        </Button>
-                        <Button variant="outline" className="w-full justify-start text-sm">
-                          <Icon name="Users" size={16} className="mr-2" />
-                          Галерея героев
-                        </Button>
-                        <Button variant="outline" className="w-full justify-start text-sm">
-                          <Icon name="Camera" size={16} className="mr-2" />
-                          Фотохроника
-                        </Button>
-                      </div>
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Immortal Regiment Section */}
       <section className="py-20 bg-gradient-to-br from-red-50 to-blue-50">
