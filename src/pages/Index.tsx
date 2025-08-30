@@ -5,10 +5,90 @@ import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
+  const [memorialForm, setMemorialForm] = useState({
+    name: '',
+    surname: '',
+    middleName: '',
+    birthDate: '',
+    deathDate: '',
+    rank: '',
+    unit: '',
+    awardType: '',
+    biography: '',
+    submitterName: '',
+    submitterPhone: '',
+    submitterEmail: '',
+    relationship: ''
+  });
+  const [memorialPhotos, setMemorialPhotos] = useState<File[]>([]);
+  const [submittedHeroes, setSubmittedHeroes] = useState<any[]>([
+    {
+      id: 1,
+      name: 'Александр',
+      surname: 'Иванов',
+      rank: 'Старший лейтенант',
+      unit: '58-я общевойсковая армия',
+      birthDate: '1995-03-15',
+      deathDate: '2022-04-12',
+      award: 'Герой Российской Федерации',
+      biography: 'Храбро сражался при освобождении мирных территорий. Своим героическим поступком спас жизни товарищей.',
+      photo: null
+    },
+    {
+      id: 2,
+      name: 'Дмитрий',
+      surname: 'Петров',
+      rank: 'Младший сержант',
+      unit: 'ВДВ России',
+      birthDate: '1998-07-22',
+      deathDate: '2022-09-08',
+      award: 'Орден Мужества',
+      biography: 'Десантник, проявивший исключительную храбрость в бою. Погиб, защищая своих товарищей.',
+      photo: null
+    },
+    {
+      id: 3,
+      name: 'Сергей',
+      surname: 'Козлов',
+      rank: 'Капитан',
+      unit: 'Морская пехота',
+      birthDate: '1990-12-03',
+      deathDate: '2023-01-25',
+      award: 'Орден Красной Звезды',
+      biography: 'Командир подразделения, до последнего выполнявший боевую задачу. Пример мужества для всех сослуживцев.',
+      photo: null
+    }
+  ]);
+
+  const handleMemorialSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Здесь будет логика отправки формы
+    alert('Спасибо за предоставленную информацию. Данные переданы на модерацию.');
+    setMemorialForm({
+      name: '',
+      surname: '',
+      middleName: '',
+      birthDate: '',
+      deathDate: '',
+      rank: '',
+      unit: '',
+      awardType: '',
+      biography: '',
+      submitterName: '',
+      submitterPhone: '',
+      submitterEmail: '',
+      relationship: ''
+    });
+    setMemorialPhotos([]);
+  };
 
   const sections = [
     {
@@ -468,23 +548,312 @@ const Index = () => {
                         )}
                         
                         {section.id === 'immortal' && (
-                          <div className="text-center space-y-6">
-                            <div className="w-16 h-16 bg-patriotic-red rounded-full flex items-center justify-center mx-auto">
-                              <Icon name="Heart" size={32} className="text-white" />
+                          <div className="space-y-8">
+                            {/* Header */}
+                            <div className="text-center space-y-4">
+                              <div className="w-16 h-16 bg-patriotic-red rounded-full flex items-center justify-center mx-auto">
+                                <Icon name="Heart" size={32} className="text-white" />
+                              </div>
+                              <h3 className="font-montserrat text-3xl font-semibold text-patriotic-blue">Бессмертный полк СВО</h3>
+                              <p className="text-gray-600 max-w-2xl mx-auto">
+                                Вечная память героям, отдавшим жизни за Родину. Присылайте фотографии и информацию о ваших близких, чтобы их подвиг остался в истории.
+                              </p>
                             </div>
-                            <h3 className="font-montserrat text-2xl font-semibold">Вечная память героям</h3>
-                            <div className="grid md:grid-cols-3 gap-4">
-                              {section.content.memorial.map((memorial, idx) => (
-                                <Card key={idx} className="border-patriotic-red border-2">
-                                  <CardHeader>
-                                    <CardTitle className="text-center text-lg">{memorial.category}</CardTitle>
-                                  </CardHeader>
-                                  <CardContent>
-                                    <p className="text-center text-gray-600">{memorial.description}</p>
-                                  </CardContent>
-                                </Card>
-                              ))}
-                            </div>
+
+                            <Tabs defaultValue="heroes" className="w-full">
+                              <TabsList className="grid w-full grid-cols-2">
+                                <TabsTrigger value="heroes" className="flex items-center space-x-2">
+                                  <Icon name="Users" size={16} />
+                                  <span>Галерея памяти</span>
+                                </TabsTrigger>
+                                <TabsTrigger value="submit" className="flex items-center space-x-2">
+                                  <Icon name="Plus" size={16} />
+                                  <span>Добавить героя</span>
+                                </TabsTrigger>
+                              </TabsList>
+
+                              {/* Галерея памяти */}
+                              <TabsContent value="heroes" className="mt-6">
+                                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                  {submittedHeroes.map((hero) => (
+                                    <Card key={hero.id} className="border-patriotic-red border-2 hover:shadow-lg transition-shadow">
+                                      <CardHeader className="text-center pb-3">
+                                        <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-3 flex items-center justify-center">
+                                          {hero.photo ? (
+                                            <img src={hero.photo} alt={`${hero.name} ${hero.surname}`} className="w-full h-full rounded-full object-cover" />
+                                          ) : (
+                                            <Icon name="User" size={32} className="text-gray-500" />
+                                          )}
+                                        </div>
+                                        <CardTitle className="text-lg">
+                                          {hero.name} {hero.surname}
+                                        </CardTitle>
+                                        <Badge className="bg-patriotic-gold text-patriotic-blue">
+                                          {hero.rank}
+                                        </Badge>
+                                      </CardHeader>
+                                      <CardContent className="text-center space-y-2">
+                                        <p className="text-sm text-gray-600">{hero.unit}</p>
+                                        <div className="flex justify-between text-xs text-gray-500">
+                                          <span>{new Date(hero.birthDate).getFullYear()}</span>
+                                          <span>—</span>
+                                          <span>{new Date(hero.deathDate).getFullYear()}</span>
+                                        </div>
+                                        <Badge variant="outline" className="border-patriotic-red text-patriotic-red">
+                                          {hero.award}
+                                        </Badge>
+                                        <p className="text-sm text-gray-700 mt-3 text-left">{hero.biography}</p>
+                                      </CardContent>
+                                    </Card>
+                                  ))}
+                                </div>
+                              </TabsContent>
+
+                              {/* Форма добавления */}
+                              <TabsContent value="submit" className="mt-6">
+                                <div className="max-w-4xl mx-auto">
+                                  <Card className="border-patriotic-blue border-2">
+                                    <CardHeader>
+                                      <CardTitle className="text-center text-patriotic-blue flex items-center justify-center space-x-2">
+                                        <Icon name="Heart" size={24} className="text-patriotic-red" />
+                                        <span>Добавить информацию о герое</span>
+                                      </CardTitle>
+                                      <p className="text-center text-gray-600">
+                                        Заполните форму, чтобы увековечить память о вашем близком человеке
+                                      </p>
+                                    </CardHeader>
+                                    <CardContent>
+                                      <form onSubmit={handleMemorialSubmit} className="space-y-6">
+                                        {/* Основная информация */}
+                                        <div className="space-y-4">
+                                          <h4 className="font-semibold text-lg text-patriotic-blue border-b pb-2">Основная информация</h4>
+                                          <div className="grid md:grid-cols-3 gap-4">
+                                            <div>
+                                              <Label htmlFor="surname">Фамилия *</Label>
+                                              <Input
+                                                id="surname"
+                                                value={memorialForm.surname}
+                                                onChange={(e) => setMemorialForm({...memorialForm, surname: e.target.value})}
+                                                required
+                                                placeholder="Иванов"
+                                              />
+                                            </div>
+                                            <div>
+                                              <Label htmlFor="name">Имя *</Label>
+                                              <Input
+                                                id="name"
+                                                value={memorialForm.name}
+                                                onChange={(e) => setMemorialForm({...memorialForm, name: e.target.value})}
+                                                required
+                                                placeholder="Александр"
+                                              />
+                                            </div>
+                                            <div>
+                                              <Label htmlFor="middleName">Отчество</Label>
+                                              <Input
+                                                id="middleName"
+                                                value={memorialForm.middleName}
+                                                onChange={(e) => setMemorialForm({...memorialForm, middleName: e.target.value})}
+                                                placeholder="Петрович"
+                                              />
+                                            </div>
+                                          </div>
+                                          
+                                          <div className="grid md:grid-cols-2 gap-4">
+                                            <div>
+                                              <Label htmlFor="birthDate">Дата рождения *</Label>
+                                              <Input
+                                                id="birthDate"
+                                                type="date"
+                                                value={memorialForm.birthDate}
+                                                onChange={(e) => setMemorialForm({...memorialForm, birthDate: e.target.value})}
+                                                required
+                                              />
+                                            </div>
+                                            <div>
+                                              <Label htmlFor="deathDate">Дата смерти *</Label>
+                                              <Input
+                                                id="deathDate"
+                                                type="date"
+                                                value={memorialForm.deathDate}
+                                                onChange={(e) => setMemorialForm({...memorialForm, deathDate: e.target.value})}
+                                                required
+                                              />
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        {/* Военная информация */}
+                                        <div className="space-y-4">
+                                          <h4 className="font-semibold text-lg text-patriotic-blue border-b pb-2">Военная служба</h4>
+                                          <div className="grid md:grid-cols-2 gap-4">
+                                            <div>
+                                              <Label htmlFor="rank">Воинское звание</Label>
+                                              <Select value={memorialForm.rank} onValueChange={(value) => setMemorialForm({...memorialForm, rank: value})}>
+                                                <SelectTrigger>
+                                                  <SelectValue placeholder="Выберите звание" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                  <SelectItem value="рядовой">Рядовой</SelectItem>
+                                                  <SelectItem value="ефрейтор">Ефрейтор</SelectItem>
+                                                  <SelectItem value="младший-сержант">Младший сержант</SelectItem>
+                                                  <SelectItem value="сержант">Сержант</SelectItem>
+                                                  <SelectItem value="старший-сержант">Старший сержант</SelectItem>
+                                                  <SelectItem value="прапорщик">Прапорщик</SelectItem>
+                                                  <SelectItem value="младший-лейтенант">Младший лейтенант</SelectItem>
+                                                  <SelectItem value="лейтенант">Лейтенант</SelectItem>
+                                                  <SelectItem value="старший-лейтенант">Старший лейтенант</SelectItem>
+                                                  <SelectItem value="капитан">Капитан</SelectItem>
+                                                  <SelectItem value="майор">Майор</SelectItem>
+                                                  <SelectItem value="подполковник">Подполковник</SelectItem>
+                                                  <SelectItem value="полковник">Полковник</SelectItem>
+                                                </SelectContent>
+                                              </Select>
+                                            </div>
+                                            <div>
+                                              <Label htmlFor="unit">Воинская часть/подразделение</Label>
+                                              <Input
+                                                id="unit"
+                                                value={memorialForm.unit}
+                                                onChange={(e) => setMemorialForm({...memorialForm, unit: e.target.value})}
+                                                placeholder="58-я общевойсковая армия"
+                                              />
+                                            </div>
+                                          </div>
+                                          
+                                          <div>
+                                            <Label htmlFor="awardType">Награды (если имеются)</Label>
+                                            <Select value={memorialForm.awardType} onValueChange={(value) => setMemorialForm({...memorialForm, awardType: value})}>
+                                              <SelectTrigger>
+                                                <SelectValue placeholder="Выберите награду" />
+                                              </SelectTrigger>
+                                              <SelectContent>
+                                                <SelectItem value="герой-рф">Герой Российской Федерации</SelectItem>
+                                                <SelectItem value="орден-мужества">Орден Мужества</SelectItem>
+                                                <SelectItem value="орден-красной-звезды">Орден Красной Звезды</SelectItem>
+                                                <SelectItem value="медаль-за-отвагу">Медаль "За отвагу"</SelectItem>
+                                                <SelectItem value="медаль-суворова">Медаль Суворова</SelectItem>
+                                                <SelectItem value="медаль-за-боевые-отличия">Медаль "За боевые отличия"</SelectItem>
+                                                <SelectItem value="другое">Другое</SelectItem>
+                                              </SelectContent>
+                                            </Select>
+                                          </div>
+                                        </div>
+
+                                        {/* Биография */}
+                                        <div className="space-y-4">
+                                          <h4 className="font-semibold text-lg text-patriotic-blue border-b pb-2">О герое</h4>
+                                          <div>
+                                            <Label htmlFor="biography">Биография, подвиг, воспоминания *</Label>
+                                            <Textarea
+                                              id="biography"
+                                              value={memorialForm.biography}
+                                              onChange={(e) => setMemorialForm({...memorialForm, biography: e.target.value})}
+                                              required
+                                              rows={5}
+                                              placeholder="Расскажите о жизни, характере, подвиге героя. Поделитесь воспоминаниями о том, каким он был человеком..."
+                                            />
+                                          </div>
+                                        </div>
+
+                                        {/* Информация о подающем */}
+                                        <div className="space-y-4">
+                                          <h4 className="font-semibold text-lg text-patriotic-blue border-b pb-2">Контактная информация</h4>
+                                          <div className="grid md:grid-cols-2 gap-4">
+                                            <div>
+                                              <Label htmlFor="submitterName">Ваше имя *</Label>
+                                              <Input
+                                                id="submitterName"
+                                                value={memorialForm.submitterName}
+                                                onChange={(e) => setMemorialForm({...memorialForm, submitterName: e.target.value})}
+                                                required
+                                                placeholder="Как к вам обращаться"
+                                              />
+                                            </div>
+                                            <div>
+                                              <Label htmlFor="relationship">Степень родства *</Label>
+                                              <Select value={memorialForm.relationship} onValueChange={(value) => setMemorialForm({...memorialForm, relationship: value})}>
+                                                <SelectTrigger>
+                                                  <SelectValue placeholder="Выберите" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                  <SelectItem value="отец">Отец</SelectItem>
+                                                  <SelectItem value="мать">Мать</SelectItem>
+                                                  <SelectItem value="супруг">Супруг/супруга</SelectItem>
+                                                  <SelectItem value="сын">Сын</SelectItem>
+                                                  <SelectItem value="дочь">Дочь</SelectItem>
+                                                  <SelectItem value="брат">Брат</SelectItem>
+                                                  <SelectItem value="сестра">Сестра</SelectItem>
+                                                  <SelectItem value="друг">Друг</SelectItem>
+                                                  <SelectItem value="сослуживец">Сослуживец</SelectItem>
+                                                  <SelectItem value="другое">Другое</SelectItem>
+                                                </SelectContent>
+                                              </Select>
+                                            </div>
+                                          </div>
+                                          
+                                          <div className="grid md:grid-cols-2 gap-4">
+                                            <div>
+                                              <Label htmlFor="submitterPhone">Телефон *</Label>
+                                              <Input
+                                                id="submitterPhone"
+                                                value={memorialForm.submitterPhone}
+                                                onChange={(e) => setMemorialForm({...memorialForm, submitterPhone: e.target.value})}
+                                                required
+                                                placeholder="+7 (999) 123-45-67"
+                                              />
+                                            </div>
+                                            <div>
+                                              <Label htmlFor="submitterEmail">Email *</Label>
+                                              <Input
+                                                id="submitterEmail"
+                                                type="email"
+                                                value={memorialForm.submitterEmail}
+                                                onChange={(e) => setMemorialForm({...memorialForm, submitterEmail: e.target.value})}
+                                                required
+                                                placeholder="email@example.com"
+                                              />
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        {/* Фотографии */}
+                                        <div className="space-y-4">
+                                          <h4 className="font-semibold text-lg text-patriotic-blue border-b pb-2">Фотографии</h4>
+                                          <div>
+                                            <Label htmlFor="photos">Фотографии героя</Label>
+                                            <div className="mt-2 border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
+                                              <Icon name="Upload" size={32} className="mx-auto text-gray-400 mb-2" />
+                                              <p className="text-sm text-gray-600 mb-2">
+                                                Перетащите фотографии сюда или нажмите для выбора
+                                              </p>
+                                              <Button type="button" variant="outline">
+                                                Выбрать файлы
+                                              </Button>
+                                            </div>
+                                          </div>
+                                        </div>
+
+                                        <div className="pt-6 border-t">
+                                          <div className="flex flex-col sm:flex-row gap-4 justify-end">
+                                            <Button type="button" variant="outline" className="px-8">
+                                              Отменить
+                                            </Button>
+                                            <Button type="submit" className="bg-patriotic-red hover:bg-patriotic-red/90 text-white px-8">
+                                              <Icon name="Send" size={16} className="mr-2" />
+                                              Отправить на модерацию
+                                            </Button>
+                                          </div>
+                                          <p className="text-xs text-gray-500 mt-4 text-center">
+                                            Все данные проходят модерацию перед публикацией. Мы свяжемся с вами для уточнения деталей.
+                                          </p>
+                                        </div>
+                                      </form>
+                                    </CardContent>
+                                  </Card>
+                                </div>
+                              </TabsContent>
+                            </Tabs>
                           </div>
                         )}
                       </div>
