@@ -1144,12 +1144,6 @@ const Index = () => {
                                   Все данные проходят модерацию перед публикацией. Мы свяжемся с вами для уточнения деталей.
                                 </p>
                               </div>
-                            </form>
-                          </CardContent>
-                        </Card>
-                      </div>
-                    </TabsContent>
-                  </Tabs>
                 </div>
               </DialogContent>
             </Dialog>
