@@ -1145,7 +1145,6 @@ const Index = () => {
                                 </p>
                               </div>
                             </form>
-                </div>
               </DialogContent>
             </Dialog>
           </div>
