@@ -455,60 +455,119 @@ const Index = () => {
         </section>
       )}
 
-      {/* Immortal Regiment Section */}
+      {/* Gallery of Feats Section */}
       {activeSection === 'memorial' && (
-      <section className="py-20 bg-gradient-to-br from-red-50 to-blue-50">
+      <section className="py-20 bg-gradient-to-br from-green-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="font-montserrat text-4xl font-bold text-patriotic-blue mb-4 flex items-center justify-center">
-              <Icon name="Heart" size={32} className="text-patriotic-red mr-3" />
-              Бессмертный полк СВО
+              <Icon name="Award" size={32} className="text-yellow-600 mr-3" />
+              Галерея подвигов СВО
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Вечная память героям, отдавшим жизни за Родину. Здесь каждая история — это подвиг, 
-              каждое имя — символ мужества и самопожертвования.
+            <p className="text-xl text-gray-600 max-w-4xl mx-auto">
+              Подвиги участников передовой и тыла, достижения науки и техники, медали и награды — 
+              всё, что способствует достижению целей специальной военной операции.
             </p>
           </div>
 
-          {/* Memorial Dialog */}
+          {/* Achievement Categories */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <Card className="text-center p-6 hover:shadow-lg transition-shadow bg-gradient-to-b from-green-50 to-green-100 border-green-200">
+              <Icon name="Zap" size={40} className="mx-auto mb-4 text-green-600" />
+              <h3 className="font-bold text-lg mb-2 text-green-800">Боевые подвиги</h3>
+              <p className="text-sm text-green-700">Героические действия на передовой</p>
+            </Card>
+            
+            <Card className="text-center p-6 hover:shadow-lg transition-shadow bg-gradient-to-b from-blue-50 to-blue-100 border-blue-200">
+              <Icon name="Users" size={40} className="mx-auto mb-4 text-blue-600" />
+              <h3 className="font-bold text-lg mb-2 text-blue-800">Подвиги тыла</h3>
+              <p className="text-sm text-blue-700">Вклад работников тыла и волонтёров</p>
+            </Card>
+            
+            <Card className="text-center p-6 hover:shadow-lg transition-shadow bg-gradient-to-b from-purple-50 to-purple-100 border-purple-200">
+              <Icon name="Lightbulb" size={40} className="mx-auto mb-4 text-purple-600" />
+              <h3 className="font-bold text-lg mb-2 text-purple-800">Научные достижения</h3>
+              <p className="text-sm text-purple-700">Разработки и открытия для СВО</p>
+            </Card>
+            
+            <Card className="text-center p-6 hover:shadow-lg transition-shadow bg-gradient-to-b from-orange-50 to-orange-100 border-orange-200">
+              <Icon name="Medal" size={40} className="mx-auto mb-4 text-orange-600" />
+              <h3 className="font-bold text-lg mb-2 text-orange-800">Награды и медали</h3>
+              <p className="text-sm text-orange-700">Государственные и ведомственные награды</p>
+            </Card>
+          </div>
+
+          {/* Add Achievement Dialog */}
           <div className="flex justify-center mb-8">
             <Dialog>
               <DialogTrigger asChild>
-                <Button className="bg-patriotic-red hover:bg-patriotic-red/90 text-white px-8 py-4 text-lg">
+                <Button className="bg-patriotic-blue hover:bg-patriotic-blue/90 text-white px-8 py-4 text-lg">
                   <Icon name="Plus" size={20} className="mr-2" />
-                  Добавить героя в галерею памяти
+                  Добавить информацию о подвиге
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+              <DialogContent className="max-w-5xl max-h-[85vh] overflow-y-auto">
                 <DialogHeader>
                   <DialogTitle className="text-2xl text-patriotic-blue flex items-center">
-                    <Icon name="Heart" size={24} className="text-patriotic-red mr-2" />
-                    Добавить героя в Бессмертный полк СВО
+                    <Icon name="Award" size={24} className="text-yellow-600 mr-2" />
+                    Добавить информацию в Галерею подвигов СВО
                   </DialogTitle>
+                  <DialogDescription className="text-gray-600 mt-2">
+                    Расскажите о подвиге, достижении или вкладе в реализацию целей СВО
+                  </DialogDescription>
                 </DialogHeader>
                 
                 <div className="mt-6">
-                  {/* Disclaimer about gallery opening */}
-                  <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200 rounded-lg p-6 mb-6">
-                    <div className="flex items-start space-x-4">
-                      <Icon name="Clock" size={24} className="text-orange-600 mt-1 flex-shrink-0" />
-                      <div>
-                        <h4 className="font-bold text-orange-800 mb-3 text-lg">Галерея памяти откроется после окончания СВО</h4>
-                        <p className="text-orange-700 mb-4 leading-relaxed">
-                          <strong>Галерея памяти</strong> Бессмертного полка СВО станет доступна для просмотра только после 
-                          официального завершения специальной военной операции. До этого момента галерея остается закрытой 
-                          из уважения к текущим событиям и их участникам.
-                        </p>
-                        <p className="text-orange-700 mb-4 leading-relaxed">
-                          <strong>Однако уже сейчас</strong> вы можете внести данные о погибшем герое. Все материалы будут 
-                          сохранены, проверены и подготовлены к публикации в галерее памяти.
-                        </p>
-                        <div className="bg-white/70 rounded-lg p-4 border border-yellow-300">
-                          <p className="text-sm text-orange-800 font-medium">
-                            💫 <strong>Ваш вклад важен:</strong> Каждая история, переданная сегодня, станет частью вечной памяти о героях СВО
-                          </p>
+                  {/* Achievement Type Selection */}
+                  <div className="bg-gradient-to-r from-blue-50 to-green-50 border border-blue-200 rounded-lg p-6 mb-6">
+                    <h4 className="font-bold text-patriotic-blue mb-4 text-lg flex items-center">
+                      <Icon name="Target" size={20} className="mr-2" />
+                      Выберите категорию подвига
+                    </h4>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <label className="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-white/60 transition-colors">
+                        <input type="radio" name="achievementType" value="combat" className="mr-3" />
+                        <div className="flex items-center">
+                          <Icon name="Zap" size={20} className="text-green-600 mr-3" />
+                          <div>
+                            <div className="font-semibold text-green-800">Боевой подвиг</div>
+                            <div className="text-sm text-green-700">Героические действия на передовой</div>
+                          </div>
                         </div>
-                      </div>
+                      </label>
+                      
+                      <label className="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-white/60 transition-colors">
+                        <input type="radio" name="achievementType" value="civilian" className="mr-3" />
+                        <div className="flex items-center">
+                          <Icon name="Users" size={20} className="text-blue-600 mr-3" />
+                          <div>
+                            <div className="font-semibold text-blue-800">Подвиг тыла</div>
+                            <div className="text-sm text-blue-700">Вклад работников тыла, волонтёров</div>
+                          </div>
+                        </div>
+                      </label>
+                      
+                      <label className="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-white/60 transition-colors">
+                        <input type="radio" name="achievementType" value="scientific" className="mr-3" />
+                        <div className="flex items-center">
+                          <Icon name="Lightbulb" size={20} className="text-purple-600 mr-3" />
+                          <div>
+                            <div className="font-semibold text-purple-800">Научное достижение</div>
+                            <div className="text-sm text-purple-700">Разработки, открытия, изобретения</div>
+                          </div>
+                        </div>
+                      </label>
+                      
+                      <label className="flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:bg-white/60 transition-colors">
+                        <input type="radio" name="achievementType" value="award" className="mr-3" />
+                        <div className="flex items-center">
+                          <Icon name="Medal" size={20} className="text-orange-600 mr-3" />
+                          <div>
+                            <div className="font-semibold text-orange-800">Награда/медаль</div>
+                            <div className="text-sm text-orange-700">Государственные, ведомственные награды</div>
+                          </div>
+                        </div>
+                      </label>
                     </div>
                   </div>
 
@@ -518,24 +577,290 @@ const Index = () => {
                       <div>
                         <h4 className="font-semibold text-patriotic-blue mb-2">О процессе модерации</h4>
                         <p className="text-sm text-gray-700">
-                          Все материалы проходят тщательную модерацию для обеспечения достоверности информации. 
-                          После отправки заявки с вами свяжутся для уточнения деталей и подтверждения данных.
+                          Все материалы проходят проверку для обеспечения достоверности информации. 
+                          Публикация производится только после подтверждения фактов.
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  <Tabs defaultValue="heroes" className="w-full">
-                    <TabsList className="grid w-full grid-cols-2">
-                      <TabsTrigger value="heroes" className="flex items-center space-x-2">
-                        <Icon name="Users" size={16} />
-                        <span>Галерея памяти</span>
-                      </TabsTrigger>
-                      <TabsTrigger value="submit" className="flex items-center space-x-2">
-                        <Icon name="Plus" size={16} />
-                        <span>Добавить героя</span>
-                      </TabsTrigger>
-                    </TabsList>
+                  <form className="space-y-8">
+                    {/* Basic Information */}
+                    <div className="space-y-6">
+                      <h4 className="font-semibold text-lg text-patriotic-blue border-b pb-2 flex items-center">
+                        <Icon name="FileText" size={20} className="mr-2" />
+                        Основная информация
+                      </h4>
+                      
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="achievementTitle">Название подвига/достижения *</Label>
+                          <Input
+                            id="achievementTitle"
+                            placeholder="Краткое название подвига или достижения"
+                            className="mt-1"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="achievementDate">Дата совершения</Label>
+                          <Input
+                            id="achievementDate"
+                            type="date"
+                            className="mt-1"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <Label htmlFor="achievementDescription">Подробное описание *</Label>
+                        <Textarea
+                          id="achievementDescription"
+                          rows={4}
+                          placeholder="Подробно опишите подвиг, достижение или вклад в реализацию целей СВО..."
+                          className="mt-1"
+                          required
+                        />
+                        <p className="text-xs text-gray-500 mt-1">
+                          Минимум 150 символов. Указывайте только проверенную информацию.
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Person/Organization Information */}
+                    <div className="space-y-6">
+                      <h4 className="font-semibold text-lg text-patriotic-blue border-b pb-2 flex items-center">
+                        <Icon name="User" size={20} className="mr-2" />
+                        Информация об участнике
+                      </h4>
+                      
+                      <div className="grid md:grid-cols-3 gap-4">
+                        <div>
+                          <Label htmlFor="participantSurname">Фамилия *</Label>
+                          <Input
+                            id="participantSurname"
+                            placeholder="Иванов"
+                            className="mt-1"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="participantName">Имя *</Label>
+                          <Input
+                            id="participantName"
+                            placeholder="Иван"
+                            className="mt-1"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="participantMiddleName">Отчество</Label>
+                          <Input
+                            id="participantMiddleName"
+                            placeholder="Иванович"
+                            className="mt-1"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="participantRank">Звание/должность</Label>
+                          <Input
+                            id="participantRank"
+                            placeholder="Старший лейтенант, инженер, волонтёр и т.д."
+                            className="mt-1"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="participantUnit">Подразделение/организация</Label>
+                          <Input
+                            id="participantUnit"
+                            placeholder="Воинская часть, предприятие, НИИ и т.д."
+                            className="mt-1"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Award/Recognition Information */}
+                    <div className="space-y-6">
+                      <h4 className="font-semibold text-lg text-patriotic-blue border-b pb-2 flex items-center">
+                        <Icon name="Award" size={20} className="mr-2" />
+                        Награды и признание
+                      </h4>
+                      
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="awardName">Название награды</Label>
+                          <Input
+                            id="awardName"
+                            placeholder="Орден Мужества, медаль 'За отвагу' и т.д."
+                            className="mt-1"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="awardDate">Дата награждения</Label>
+                          <Input
+                            id="awardDate"
+                            type="date"
+                            className="mt-1"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <Label htmlFor="awardReason">Основание для награждения</Label>
+                        <Textarea
+                          id="awardReason"
+                          rows={3}
+                          placeholder="За что именно была вручена награда..."
+                          className="mt-1"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Technical/Scientific Details (conditional) */}
+                    <div className="space-y-6">
+                      <h4 className="font-semibold text-lg text-patriotic-blue border-b pb-2 flex items-center">
+                        <Icon name="Settings" size={20} className="mr-2" />
+                        Технические детали (для научных достижений)
+                      </h4>
+                      
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="technicalField">Область науки/техники</Label>
+                          <Input
+                            id="technicalField"
+                            placeholder="Радиоэлектроника, медицина, материаловедение и т.д."
+                            className="mt-1"
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="applicationArea">Сфера применения</Label>
+                          <Input
+                            id="applicationArea"
+                            placeholder="Военная техника, медицинское оборудование и т.д."
+                            className="mt-1"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <Label htmlFor="technicalDescription">Техническое описание</Label>
+                        <Textarea
+                          id="technicalDescription"
+                          rows={3}
+                          placeholder="Описание технических особенностей, принципа действия..."
+                          className="mt-1"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Contact Information */}
+                    <div className="space-y-6">
+                      <h4 className="font-semibold text-lg text-patriotic-blue border-b pb-2 flex items-center">
+                        <Icon name="Phone" size={20} className="mr-2" />
+                        Контактная информация
+                      </h4>
+                      
+                      <div className="bg-blue-50 rounded-lg p-4 mb-4">
+                        <p className="text-sm text-gray-700">
+                          <Icon name="Lock" size={16} className="inline mr-1" />
+                          Ваши контактные данные не публикуются и используются только для связи с модераторами.
+                        </p>
+                      </div>
+                      
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="submitterName">Ваше имя *</Label>
+                          <Input
+                            id="submitterName"
+                            placeholder="Фамилия Имя Отчество"
+                            className="mt-1"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="submitterPhone">Телефон *</Label>
+                          <Input
+                            id="submitterPhone"
+                            type="tel"
+                            placeholder="+7 (XXX) XXX-XX-XX"
+                            className="mt-1"
+                            required
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="submitterEmail">Email *</Label>
+                          <Input
+                            id="submitterEmail"
+                            type="email"
+                            placeholder="example@mail.ru"
+                            className="mt-1"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="relationship">Ваша связь с участником</Label>
+                          <select 
+                            id="relationship"
+                            className="w-full mt-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-patriotic-blue"
+                          >
+                            <option value="">Выберите</option>
+                            <option value="self">Это я сам</option>
+                            <option value="colleague">Коллега</option>
+                            <option value="commander">Командир</option>
+                            <option value="subordinate">Подчинённый</option>
+                            <option value="relative">Родственник</option>
+                            <option value="friend">Друг</option>
+                            <option value="witness">Очевидец</option>
+                            <option value="other">Другое</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Files Upload */}
+                    <div className="space-y-4">
+                      <h4 className="font-semibold text-lg text-patriotic-blue border-b pb-2 flex items-center">
+                        <Icon name="Upload" size={20} className="mr-2" />
+                        Документы и фотографии
+                      </h4>
+                      <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                        <Icon name="Upload" size={40} className="mx-auto text-gray-400 mb-4" />
+                        <p className="text-gray-600 mb-2">
+                          Загрузите фотографии, документы, справки, приказы
+                        </p>
+                        <p className="text-sm text-gray-500 mb-4">
+                          Поддерживаются форматы: JPG, PNG, PDF, DOC. Максимум 10 файлов по 5 МБ
+                        </p>
+                        <Button type="button" variant="outline">
+                          <Icon name="Plus" size={16} className="mr-2" />
+                          Выбрать файлы
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Submit */}
+                    <div className="pt-6 border-t">
+                      <div className="flex flex-col sm:flex-row gap-4 justify-end">
+                        <Button type="button" variant="outline" className="px-8">
+                          Отменить
+                        </Button>
+                        <Button type="submit" className="bg-patriotic-blue hover:bg-patriotic-blue/90 text-white px-8">
+                          <Icon name="Send" size={16} className="mr-2" />
+                          Отправить на модерацию
+                        </Button>
+                      </div>
+                      <p className="text-xs text-gray-500 mt-4 text-center">
+                        Информация будет проверена модераторами перед публикацией. Мы свяжемся с вами для уточнения деталей.
+                      </p>
+                    </div>
+                  </form>
 
                     {/* Галерея памяти */}
                     <TabsContent value="heroes" className="mt-6">
@@ -830,78 +1155,144 @@ const Index = () => {
             </Dialog>
           </div>
 
-          {/* Closed Gallery Section */}
-          <div className="relative min-h-[600px] bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 rounded-2xl overflow-hidden border border-gray-600">
-            {/* Background pattern */}
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute inset-0" style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3Ccircle cx='53' cy='7' r='1'/%3E%3Ccircle cx='7' cy='53' r='1'/%3E%3Ccircle cx='53' cy='53' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-              }} />
-            </div>
-
-            {/* Content */}
-            <div className="relative z-10 flex items-center justify-center h-full py-20">
-              <div className="text-center text-white max-w-3xl mx-auto px-6">
-                <div className="mb-8">
-                  <Icon name="Lock" size={80} className="mx-auto mb-6 text-yellow-400" />
-                </div>
-                
-                <h3 className="text-4xl font-bold mb-6 text-yellow-400">
-                  Галерея памяти закрыта
-                </h3>
-                
-                <p className="text-xl mb-8 opacity-90 leading-relaxed">
-                  Галерея памяти героев Бессмертного полка СВО откроется после официального завершения 
-                  специальной военной операции. Это решение принято из глубокого уважения к текущим событиям 
-                  и их участникам.
-                </p>
-
-                <div className="grid md:grid-cols-2 gap-6 mb-10">
-                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-                    <Icon name="Clock" size={32} className="mx-auto mb-4 text-blue-400" />
-                    <h4 className="text-lg font-semibold mb-3 text-blue-400">Когда откроется?</h4>
-                    <p className="text-sm opacity-90">
-                      Галерея станет доступна в день официального объявления о завершении СВО
-                    </p>
-                  </div>
-                  
-                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
-                    <Icon name="Database" size={32} className="mx-auto mb-4 text-green-400" />
-                    <h4 className="text-lg font-semibold mb-3 text-green-400">Материалы сохранены</h4>
-                    <p className="text-sm opacity-90">
-                      Все поданные заявки сохранены и готовятся к публикации в галерее
-                    </p>
-                  </div>
-                </div>
-
-                <div className="bg-gradient-to-r from-red-900/50 to-blue-900/50 rounded-lg p-6 border border-red-500/30">
-                  <div className="flex items-start space-x-4">
-                    <Icon name="Heart" size={24} className="text-red-400 mt-1 flex-shrink-0" />
-                    <div className="text-left">
-                      <h4 className="text-lg font-semibold mb-2 text-red-400">Память вечна</h4>
-                      <p className="text-sm opacity-90 leading-relaxed">
-                        В день открытия галереи каждая история станет частью вечной памяти о героях, 
-                        отдавших свои жизни за мир и безопасность нашей Родины. 
-                        Их имена навсегда останутся в сердцах благодарных потомков.
-                      </p>
+          {/* Gallery of Achievements */}
+          <div className="mt-12">
+            <h3 className="text-2xl font-bold text-patriotic-blue text-center mb-8">
+              Примеры подвигов в галерее
+            </h3>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Combat Achievement */}
+              <Card className="hover:shadow-xl transition-shadow bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+                <CardHeader>
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center mr-4">
+                      <Icon name="Zap" size={24} className="text-white" />
+                    </div>
+                    <div>
+                      <Badge className="bg-green-600 text-white mb-2">Боевой подвиг</Badge>
+                      <CardTitle className="text-lg text-green-800">Операция "Прорыв"</CardTitle>
                     </div>
                   </div>
-                </div>
-
-                <div className="mt-8 pt-6 border-t border-white/20">
-                  <p className="text-sm opacity-75">
-                    Вы можете продолжать подавать заявки на включение героев в галерею памяти
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-green-700 mb-4">
+                    Успешное освобождение населённого пункта силами разведгруппы под командованием капитана Петрова А.И.
                   </p>
-                </div>
-              </div>
+                  <div className="space-y-2 text-xs text-green-600">
+                    <div className="flex justify-between">
+                      <span>Дата:</span>
+                      <span>15 марта 2023</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Награда:</span>
+                      <span>Орден Мужества</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Civilian Achievement */}
+              <Card className="hover:shadow-xl transition-shadow bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+                <CardHeader>
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center mr-4">
+                      <Icon name="Users" size={24} className="text-white" />
+                    </div>
+                    <div>
+                      <Badge className="bg-blue-600 text-white mb-2">Подвиг тыла</Badge>
+                      <CardTitle className="text-lg text-blue-800">Волонтёрский центр "Помощь"</CardTitle>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-blue-700 mb-4">
+                    Организация сбора и доставки гуманитарной помощи в зону СВО. Собрано более 500 тонн грузов.
+                  </p>
+                  <div className="space-y-2 text-xs text-blue-600">
+                    <div className="flex justify-between">
+                      <span>Руководитель:</span>
+                      <span>Смирнова Е.П.</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Награда:</span>
+                      <span>Медаль "За заслуги"</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Scientific Achievement */}
+              <Card className="hover:shadow-xl transition-shadow bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+                <CardHeader>
+                  <div className="flex items-center mb-4">
+                    <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center mr-4">
+                      <Icon name="Lightbulb" size={24} className="text-white" />
+                    </div>
+                    <div>
+                      <Badge className="bg-purple-600 text-white mb-2">Научное достижение</Badge>
+                      <CardTitle className="text-lg text-purple-800">Система "Защитник-М"</CardTitle>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-purple-700 mb-4">
+                    Разработка системы активной защиты бронетехники, повысившей выживаемость экипажей на 40%.
+                  </p>
+                  <div className="space-y-2 text-xs text-purple-600">
+                    <div className="flex justify-between">
+                      <span>Разработчик:</span>
+                      <span>НИИ "Электрон"</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span>Статус:</span>
+                      <span>Принято на вооружение</span>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
 
-            {/* Decorative stars */}
-            <div className="absolute top-10 left-10 w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
-            <div className="absolute top-20 right-16 w-1 h-1 bg-white rounded-full animate-pulse animation-delay-75"></div>
-            <div className="absolute bottom-20 left-20 w-3 h-3 bg-red-400 rounded-full animate-pulse animation-delay-150"></div>
-            <div className="absolute bottom-10 right-10 w-2 h-2 bg-blue-400 rounded-full animate-pulse animation-delay-200"></div>
-            <div className="absolute top-1/3 left-1/3 w-1 h-1 bg-white/60 rounded-full animate-pulse animation-delay-300"></div>
+            <div className="text-center mt-8">
+              <p className="text-gray-600 mb-4">
+                Это лишь примеры подвигов, которые уже внесены в галерею
+              </p>
+              <Button variant="outline" className="border-patriotic-blue text-patriotic-blue hover:bg-patriotic-blue hover:text-white">
+                <Icon name="Eye" size={16} className="mr-2" />
+                Просмотреть все достижения
+              </Button>
+            </div>
+          </div>
+
+          {/* Statistics */}
+          <div className="grid md:grid-cols-4 gap-6 mt-16">
+            <Card className="text-center p-6">
+              <CardContent className="p-0">
+                <div className="text-3xl font-bold text-green-600 mb-2">287</div>
+                <div className="text-sm text-gray-600">Боевых подвигов</div>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center p-6">
+              <CardContent className="p-0">
+                <div className="text-3xl font-bold text-blue-600 mb-2">156</div>
+                <div className="text-sm text-gray-600">Подвигов тыла</div>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center p-6">
+              <CardContent className="p-0">
+                <div className="text-3xl font-bold text-purple-600 mb-2">43</div>
+                <div className="text-sm text-gray-600">Научных достижений</div>
+              </CardContent>
+            </Card>
+            
+            <Card className="text-center p-6">
+              <CardContent className="p-0">
+                <div className="text-3xl font-bold text-orange-600 mb-2">892</div>
+                <div className="text-sm text-gray-600">Наград вручено</div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
