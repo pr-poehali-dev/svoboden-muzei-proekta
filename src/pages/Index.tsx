@@ -1144,11 +1144,12 @@ const Index = () => {
                                   Все данные проходят модерацию перед публикацией. Мы свяжемся с вами для уточнения деталей.
                                 </p>
                               </div>
-                  </form>
-                </div>
-              </DialogContent>
-            </Dialog>
-          </div>
+                            </form>
+                          </div>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                  </div>
 
           {/* Gallery of Achievements */}
           <div className="mt-12">
