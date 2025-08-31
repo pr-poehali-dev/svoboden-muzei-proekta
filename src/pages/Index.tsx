@@ -458,7 +458,7 @@ const Index = () => {
       {/* Gallery of Feats Section */}
       {activeSection === 'memorial' && (
         <section className="py-20 bg-gradient-to-br from-green-50 to-blue-50">
-        <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="font-montserrat text-4xl font-bold text-patriotic-blue mb-4 flex items-center justify-center">
               <Icon name="Award" size={32} className="text-yellow-600 mr-3" />
@@ -1144,7 +1144,7 @@ const Index = () => {
                                   Все данные проходят модерацию перед публикацией. Мы свяжемся с вами для уточнения деталей.
                                 </p>
                               </div>
-                            </form>
+                  </form>
                 </div>
               </DialogContent>
             </Dialog>
@@ -1289,8 +1289,8 @@ const Index = () => {
               </CardContent>
             </Card>
           </div>
-        </div>
-      </section>
+          </div>
+        </section>
       )}
 
       {/* Interactive Timeline Preview */}
