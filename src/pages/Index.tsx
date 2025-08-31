@@ -1145,11 +1145,13 @@ const Index = () => {
                                 </p>
                               </div>
                             </form>
-                          </div>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </TabsContent>
                   </div>
+                </DialogContent>
+              </Dialog>
 
           {/* Gallery of Achievements */}
           <div className="mt-12">
@@ -1289,7 +1291,6 @@ const Index = () => {
                 <div className="text-sm text-gray-600">Наград вручено</div>
               </CardContent>
             </Card>
-          </div>
           </div>
         </section>
       )}
