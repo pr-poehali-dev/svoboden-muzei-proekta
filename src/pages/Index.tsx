@@ -483,16 +483,40 @@ const Index = () => {
                 <DialogHeader>
                   <DialogTitle className="text-2xl text-patriotic-blue flex items-center">
                     <Icon name="Heart" size={24} className="text-patriotic-red mr-2" />
-                    Бессмертный полк СВО
+                    Добавить героя в Бессмертный полк СВО
                   </DialogTitle>
                 </DialogHeader>
                 
                 <div className="mt-6">
+                  {/* Disclaimer about gallery opening */}
+                  <div className="bg-gradient-to-r from-yellow-50 to-orange-50 border border-yellow-200 rounded-lg p-6 mb-6">
+                    <div className="flex items-start space-x-4">
+                      <Icon name="Clock" size={24} className="text-orange-600 mt-1 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-bold text-orange-800 mb-3 text-lg">Галерея памяти откроется после окончания СВО</h4>
+                        <p className="text-orange-700 mb-4 leading-relaxed">
+                          <strong>Галерея памяти</strong> Бессмертного полка СВО станет доступна для просмотра только после 
+                          официального завершения специальной военной операции. До этого момента галерея остается закрытой 
+                          из уважения к текущим событиям и их участникам.
+                        </p>
+                        <p className="text-orange-700 mb-4 leading-relaxed">
+                          <strong>Однако уже сейчас</strong> вы можете внести данные о погибшем герое. Все материалы будут 
+                          сохранены, проверены и подготовлены к публикации в галерее памяти.
+                        </p>
+                        <div className="bg-white/70 rounded-lg p-4 border border-yellow-300">
+                          <p className="text-sm text-orange-800 font-medium">
+                            💫 <strong>Ваш вклад важен:</strong> Каждая история, переданная сегодня, станет частью вечной памяти о героях СВО
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="bg-blue-50 rounded-lg p-4 mb-6">
                     <div className="flex items-start space-x-3">
                       <Icon name="Info" size={20} className="text-patriotic-blue mt-0.5" />
                       <div>
-                        <h4 className="font-semibold text-patriotic-blue mb-2">Важная информация</h4>
+                        <h4 className="font-semibold text-patriotic-blue mb-2">О процессе модерации</h4>
                         <p className="text-sm text-gray-700">
                           Все материалы проходят тщательную модерацию для обеспечения достоверности информации. 
                           После отправки заявки с вами свяжутся для уточнения деталей и подтверждения данных.
@@ -804,6 +828,80 @@ const Index = () => {
                 </div>
               </DialogContent>
             </Dialog>
+          </div>
+
+          {/* Closed Gallery Section */}
+          <div className="relative min-h-[600px] bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900 rounded-2xl overflow-hidden border border-gray-600">
+            {/* Background pattern */}
+            <div className="absolute inset-0 opacity-20">
+              <div className="absolute inset-0" style={{
+                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='7' cy='7' r='1'/%3E%3Ccircle cx='53' cy='7' r='1'/%3E%3Ccircle cx='7' cy='53' r='1'/%3E%3Ccircle cx='53' cy='53' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              }} />
+            </div>
+
+            {/* Content */}
+            <div className="relative z-10 flex items-center justify-center h-full py-20">
+              <div className="text-center text-white max-w-3xl mx-auto px-6">
+                <div className="mb-8">
+                  <Icon name="Lock" size={80} className="mx-auto mb-6 text-yellow-400" />
+                </div>
+                
+                <h3 className="text-4xl font-bold mb-6 text-yellow-400">
+                  Галерея памяти закрыта
+                </h3>
+                
+                <p className="text-xl mb-8 opacity-90 leading-relaxed">
+                  Галерея памяти героев Бессмертного полка СВО откроется после официального завершения 
+                  специальной военной операции. Это решение принято из глубокого уважения к текущим событиям 
+                  и их участникам.
+                </p>
+
+                <div className="grid md:grid-cols-2 gap-6 mb-10">
+                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
+                    <Icon name="Clock" size={32} className="mx-auto mb-4 text-blue-400" />
+                    <h4 className="text-lg font-semibold mb-3 text-blue-400">Когда откроется?</h4>
+                    <p className="text-sm opacity-90">
+                      Галерея станет доступна в день официального объявления о завершении СВО
+                    </p>
+                  </div>
+                  
+                  <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20">
+                    <Icon name="Database" size={32} className="mx-auto mb-4 text-green-400" />
+                    <h4 className="text-lg font-semibold mb-3 text-green-400">Материалы сохранены</h4>
+                    <p className="text-sm opacity-90">
+                      Все поданные заявки сохранены и готовятся к публикации в галерее
+                    </p>
+                  </div>
+                </div>
+
+                <div className="bg-gradient-to-r from-red-900/50 to-blue-900/50 rounded-lg p-6 border border-red-500/30">
+                  <div className="flex items-start space-x-4">
+                    <Icon name="Heart" size={24} className="text-red-400 mt-1 flex-shrink-0" />
+                    <div className="text-left">
+                      <h4 className="text-lg font-semibold mb-2 text-red-400">Память вечна</h4>
+                      <p className="text-sm opacity-90 leading-relaxed">
+                        В день открытия галереи каждая история станет частью вечной памяти о героях, 
+                        отдавших свои жизни за мир и безопасность нашей Родины. 
+                        Их имена навсегда останутся в сердцах благодарных потомков.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-white/20">
+                  <p className="text-sm opacity-75">
+                    Вы можете продолжать подавать заявки на включение героев в галерею памяти
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Decorative stars */}
+            <div className="absolute top-10 left-10 w-2 h-2 bg-yellow-400 rounded-full animate-pulse"></div>
+            <div className="absolute top-20 right-16 w-1 h-1 bg-white rounded-full animate-pulse animation-delay-75"></div>
+            <div className="absolute bottom-20 left-20 w-3 h-3 bg-red-400 rounded-full animate-pulse animation-delay-150"></div>
+            <div className="absolute bottom-10 right-10 w-2 h-2 bg-blue-400 rounded-full animate-pulse animation-delay-200"></div>
+            <div className="absolute top-1/3 left-1/3 w-1 h-1 bg-white/60 rounded-full animate-pulse animation-delay-300"></div>
           </div>
         </div>
       </section>
