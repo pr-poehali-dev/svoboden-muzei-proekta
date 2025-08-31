@@ -457,7 +457,7 @@ const Index = () => {
 
       {/* Gallery of Feats Section */}
       {activeSection === 'memorial' && (
-      <section className="py-20 bg-gradient-to-br from-green-50 to-blue-50">
+        <section className="py-20 bg-gradient-to-br from-green-50 to-blue-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="font-montserrat text-4xl font-bold text-patriotic-blue mb-4 flex items-center justify-center">
@@ -1145,11 +1145,10 @@ const Index = () => {
                                 </p>
                               </div>
                             </form>
-                          </div>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
-                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
 
           {/* Gallery of Achievements */}
           <div className="mt-12">
